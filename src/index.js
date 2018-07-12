@@ -39,7 +39,6 @@ function saveUsersLocally(data){
     saveGamesLocally(individualUser.games)
   })
 }
-
 function saveGamesLocally(games){
   return games.forEach(function(individualGame){
     let currentGame = new Game(individualGame)
@@ -74,7 +73,7 @@ function gameSetup(){
   hearts.style.textAlign = "center";
   hearts.style.color = "white";
   hearts.id = "heartDisplay"
-  let heartsCounter = 3; //adjust this to increase/decrease number of starting lives
+  let heartsCounter = 3;
   hearts.innerHTML = `<i id="heart-1" class="fas fa-heart hearts"></i><i id="heart-2" class="fas fa-heart hearts"></i><i id="heart-3" class="fas fa-heart hearts"></i>`
   heartContainer.append(hearts)
 
@@ -104,19 +103,16 @@ function gameSetup(){
   questionContainer.append(question);
   handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName)
 }
-
 function countdown(timer, playerName){
-  let timeRemaining = 10;
+  let timeRemaining = 100;
   let gameCountdown = setInterval(function(){
     timeRemaining--;
     if (timeRemaining != 0 && gameActive == true) {
       timer.innerText = timeRemaining
     }
-
     else if (gameActive == false){
       return;
     }
-
     else {
       timer.innerText = "Game Over!"
       gameOver(playerName)
@@ -125,23 +121,27 @@ function countdown(timer, playerName){
   }, 1000)
 }
 
+//clear event listener or do it outside
+
 function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName){
+  // debugger
   let currentQuestion = mathQuiz();
   let userAnswer; //declaring now. Will assign value later.
   question.innerText = currentQuestion;
 
 
-
-
-  answerForm.addEventListener("click", function (e){
+  answerForm.addEventListener("click", function moreQuestions(e){
     e.preventDefault();
     if (e.target.id === "submit-answer-button"){
+      // debugger
       let userAnswer = parseInt(e.target.parentElement.getElementsByTagName("INPUT")[0].value)
+
       if (userAnswer == answer){
         activeScore++;
         document.getElementById("answer-input").value = '';
         correctAnswerCounterDisplay.innerText = `Number of correct answers: ${activeScore}`
-        handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay)
+        answerForm.removeEventListener("click", moreQuestions)
+        handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName)
       }
       else {
         heartsCounter--;
@@ -149,6 +149,7 @@ function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, 
         document.getElementById("answer-input").value=""
         if (heartsCounter == 0){
           document.getElementById("timer-display").innerText = `No more lives!`
+          answerForm.removeEventListener("click", moreQuestions)
           gameOver(playerName);
         }
       }
@@ -162,14 +163,12 @@ function gameOver(playerName){
   let user = findOrCreateUser(playerName);
   let newGame = user.createGame(activeScore);
 }
-
 function disableGameplay(){
   document.getElementById("answer-input").disabled = true;
   document.getElementById("answer-input").style.color = "gray";
   document.getElementById("submit-answer-button").disabled = true;
   document.getElementById("submit-answer-button").style.color = "gray";
 }
-
 function mathQuiz() {
   //determintes question type (+, -, *, /)
   questionType = Math.floor((Math.random() * 4) + 1)
@@ -203,21 +202,17 @@ function mathQuiz() {
     return (`${number1} / ${number2}`);
   }
 }
-
-
 function findUser(playerName){
   return store["user"].find( (individualUser) => {
     return playerName === individualUser.name
   })
 }
-
 function createUser(playerName){
   let newUser = new User ({"name": playerName})
   store["user"].push(newUser);
   newUser.addUserBackend();
   return newUser;
 }
-
 function findOrCreateUser(playerName){
   if (findUser(playerName)){
     return findUser(playerName)
