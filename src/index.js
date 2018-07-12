@@ -33,6 +33,7 @@ const loginField = document.getElementById("login-field")
 const homeViewScoreboard = document.getElementById("home-view-scoreboard");
 const postGameContainer = document.getElementById("post-game-option-container");
 const homeScoreboardButton = document.getElementById("home-scoreboard-button");
+const enterButton=document.getElementById("enter")
 
 homeScoreboardButton.addEventListener("click", displayScoreboard)
 
@@ -49,8 +50,18 @@ function saveGamesLocally(games){
     store["game"].push(currentGame)
  })
 }
+enterButton.addEventListener("submit", function clickForMe() {
+  debugger;
+  return loginSubmit.click()
+})
 
 loginSubmit.addEventListener("click", gameSetup)
+loginField.addEventListener("keypress", function(e){
+  if (e.which == 13){
+    loginSubmit.click();
+  }
+})
+
 
 function gameSetup(){
   let playerName = loginField.value;
@@ -65,7 +76,7 @@ function gameSetup(){
   answerContainer.innerHTML=""
   heartContainer.innerHTML=""
   postGameContainer.innerHTML=""
-
+  
   //create timer HTML and countdown
   let timerDisplay = document.createElement("h4");
   timerDisplay.style.textAlign = "center";
