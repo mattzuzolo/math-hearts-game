@@ -50,20 +50,22 @@ function saveGamesLocally(games){
     store["game"].push(currentGame)
  })
 }
-enterButton.addEventListener("submit", function clickForMe() {
-  debugger;
-  return loginSubmit.click()
-})
+// enterButton.addEventListener("submit", function clickForMe() {
+//   debugger;
+//   return loginSubmit.click()
+// })
 
 loginSubmit.addEventListener("click", gameSetup)
 loginField.addEventListener("keypress", function(e){
-  if (e.which == 13){
+  // e.preventDefault()
+  if (e.which === 13){
     loginSubmit.click();
   }
 })
 
 
 function gameSetup(){
+  debugger;
   let playerName = loginField.value;
   let user = findOrCreateUser(playerName);
   gameActive = true;
@@ -76,7 +78,9 @@ function gameSetup(){
   answerContainer.innerHTML=""
   heartContainer.innerHTML=""
   postGameContainer.innerHTML=""
-  
+
+  // debugger;
+
   //create timer HTML and countdown
   let timerDisplay = document.createElement("h4");
   timerDisplay.style.textAlign = "center";
