@@ -1,0 +1,103 @@
+* {
+  font-family: 'Ubuntu', sans-serif;
+  background-color: #ff4e47;
+}
+
+button {
+  background-color: white;
+  color: #ff4e47;
+  border-radius: 8px;
+  padding: .5%;
+  border: none;
+}
+
+#landing-container {
+  color: white;
+  font-size: 72px;
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  top: 30%;
+  margin-top: -10px;
+  text-align: center;
+}
+
+#choose-login-container {
+  color: white;
+  font-size: 72px;
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  top: 30%;
+  margin-top: -10px;
+  text-align: center;
+}
+
+#get-started-button {
+  font-size: 72px;
+}
+
+.login-note {
+  font-size: 28px;;
+  font-weight:300;
+  font-style: italic;
+}
+
+
+
+#start-button-no-login {
+  font-size: 32px;
+  padding-bottom: -20px;
+}
+
+.button-login{
+  background-color: white;
+  color: #ff4e47;
+  font-size: 62px;
+  border-radius: 8px;
+  padding: 1%;
+  border: none;
+  margin: 20px;
+}
+
+#question-answer-container{
+  font-size: 124px;
+  color: white;
+  position: absolute;
+  width: 100%;
+  height: 20px;
+  top: 30%;
+  margin-top: -10px;
+  text-align: center;
+}
+
+#answer-input {
+  background-color: white;
+  color: #ff4e47;
+  font-size: 56px;
+  border-radius: 8px;
+  padding: 1%;
+  border: none;
+  margin: 20px;
+}
+
+#submit-answer-button {
+  background-color: white;
+  color: #ff4e47;
+  font-size: 56px;
+  border-radius: 8px;
+  padding: 1%;
+  border: none;
+  margin: 20px;
+}
+
+#correct-answer-counter-container {
+  font-size: 48px;
+}
+
+
+#timer-display {
+  font-size: 96px;
+  font-family: 'Graduate', cursive;
+  color: white;
+}

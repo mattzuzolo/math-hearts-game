@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Graduate" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,500" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title></title>
+  </head>
+
+
+  <body>
+
+    <div id="content-container">
+
+    <div id="landing-container">
+      <h1 id="game-title">Mental Math</h1>
+      <form id="login-form">
+        <input class="button-login" id="login-field" placeholder="Enter username"></input>
+        <button class="button-login" id="login-submit-button" type="button" value="Login">Login</button>
+      </form>
+
+      <h4 class="login-note">The game will start immediately upon login</h4>
+      <p id="home-view-scoreboard" class="login-note">Click here to view the scoreboard</p>
+
+      <!-- <button id="get-started-button">Get started</button> -->
+    </div>
+
+    <div id="gameplay-container" class="container">
+        <div id="timer-container"></div>
+        <div id="question-answer-container">
+          <div id="question-container"></div>
+          <div id="answer-container"></div>
+          <div id="correct-answer-counter-container"></div>
+        </div>
+        <div id="strike-container"></div>
+        <div id="post-game-option-container"></div>
+    </div>
+
+    </div>
+    <script src="src/game.js" charset="utf-8"></script>
+    <script src="src/user.js" charset="utf-8"></script>
+    <script src="src/index.js" charset="utf-8"></script>
+  </body>
+</html>
