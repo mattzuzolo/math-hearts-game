@@ -28,6 +28,7 @@ class Game {
        };
        return fetch(gameUrl, postConfig)
      }
+
      addGame(gameUrl,submissionBody)
   }
 

@@ -33,6 +33,6 @@ class User {
     let newGame = new Game({"user_id": this.localUserId, "score": score})
     store["game"].push(newGame);
     newGame.addGameBackend();
-    return newGame
+    return newGame;
   }
 }
