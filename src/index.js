@@ -57,8 +57,8 @@ function saveGamesLocally(games){
 
 loginSubmit.addEventListener("click", gameSetup)
 loginField.addEventListener("keypress", function(e){
-  // e.preventDefault()
   if (e.which === 13){
+    e.preventDefault()
     loginSubmit.click();
   }
 })
