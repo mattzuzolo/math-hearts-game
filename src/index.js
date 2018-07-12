@@ -32,7 +32,9 @@ const correctAnswerCounterContainer = document.getElementById("correct-answer-co
 const loginField = document.getElementById("login-field")
 const homeViewScoreboard = document.getElementById("home-view-scoreboard");
 const postGameContainer = document.getElementById("post-game-option-container");
+const homeScoreboardButton = document.getElementById("home-scoreboard-button");
 
+homeScoreboardButton.addEventListener("click", displayScoreboard)
 
 function saveUsersLocally(data){
   data.forEach(function(individualUser){
@@ -215,7 +217,7 @@ function postGameOptions(){
   postGameContainer.addEventListener("click", function(e){
     e.preventDefault();
     if (e.target.id === "post-game-replay-button"){
-      alert("selected replay!")
+      location.reload();
     }
     else if (e.target.id === "post-game-scoreboard-button"){
       displayScoreboard()
@@ -224,6 +226,10 @@ function postGameOptions(){
 }
 
 function displayScoreboard(){
+
+  landingContainer.style.display = 'block';
+  landingContainer.style.display = 'none';
+
   gameplayContainer.style.display = 'none';
   let leaderboardContainer = document.createElement("div");
   leaderboardContainer.id = "leaderboard-container"
@@ -233,15 +239,19 @@ function displayScoreboard(){
   contentContainer.append(leaderboardContainer);
   leaderboardContainer.append(leaderboardHeadline);
 
-  let leaderboardListContainer = document.createElement("li");
+  let leaderboardListContainer = document.createElement("div");
   leaderboardContainer.append(leaderboardListContainer);
 
+  let leaderboardOl = document.createElement("ol");
+  leaderboardListContainer.append(leaderboardOl);
 
   let sortedScores = store["game"].slice().sort( (a,b) => b.score - a.score )
 
   sortedScores.forEach(function(individualGame){
       let leaderboardItem = document.createElement("li");
-      leaderboardListContainer.append(leaderboardItem);
+      let leaderboardUser = User.findUserById(individualGame.userId)
+      leaderboardItem.append(`${individualGame.score} - ${leaderboardUser.name}`)
+      leaderboardOl.append(leaderboardItem);
   })
 }
 

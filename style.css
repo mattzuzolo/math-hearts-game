@@ -143,3 +143,7 @@ button {
   color: white;
   text-align: center;
 }
+
+#home-scoreboard-button {
+  font-size: 50%;
+}

@@ -4,12 +4,7 @@ class User {
   constructor(obj){
     this.localUserId = ++localUserId;
     this.name = obj.name;
-    // this.apiId = obj.id;
   }
-
-  // displayUser(){
-  //   playerUl.innerHTML+=`<li>${this.name}<ul id=${this.localUserId}></ul></li>`
-  // }
 
   addUserBackend(){
     let submissionBody = {
@@ -35,4 +30,11 @@ class User {
     newGame.addGameBackend();
     return newGame;
   }
+
+  static findUserById(id) {
+    return store["user"].find(function(individualUser){
+      return individualUser.localUserId == id;
+    })
+  }
+
 }
