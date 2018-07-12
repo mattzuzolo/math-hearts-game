@@ -24,14 +24,15 @@ const answerContainer = document.getElementById('answer-container');
 const correctAnswerContainer = document.getElementById('correct-answer-container');
 const heartContainer = document.getElementById('heart-container');
 const gameplayContainer = document.getElementById('gameplay-container');
-const postGameContainer = document.getElementById("post-game-option-container")
 const contentContainer = document.getElementById("content-container");
 const getStartedButton = document.getElementById("get-started-button");
 const landingContainer = document.getElementById("landing-container");
 const loginSubmit = document.getElementById("login-submit-button")
 const correctAnswerCounterContainer = document.getElementById("correct-answer-counter-container")
 const loginField = document.getElementById("login-field")
-const homeViewScoreboard = document.getElementById("home-view-scoreboard")
+const homeViewScoreboard = document.getElementById("home-view-scoreboard");
+const postGameContainer = document.getElementById("post-game-option-container");
+
 
 function saveUsersLocally(data){
   data.forEach(function(individualUser){
@@ -105,67 +106,6 @@ function gameSetup(){
   questionContainer.append(question);
   handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName, user)
 }
-function countdown(timer, playerName, user){
-  let timeRemaining = 10;
-  let gameCountdown = setInterval(function(){
-    timeRemaining--;
-    if (timeRemaining != 0 && gameActive == true) {
-      timer.innerText = timeRemaining
-    }
-    else if (gameActive == false){
-      return;
-    }
-    else {
-      timer.innerText = "Game Over!"
-      gameOver(playerName, user)
-      clearInterval(gameCountdown);
-    }
-  }, 1000)
-}
-
-//clear event listener or do it outside
-
-function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName, user){
-  // debugger
-  let currentQuestion = mathQuiz();
-  let userAnswer; //declaring now. Will assign value later.
-  question.innerText = currentQuestion;
-
-  answerForm.addEventListener("click", function moreQuestions(e){
-    e.preventDefault();
-    if (e.target.id === "submit-answer-button"){
-      // debugger
-      let userAnswer = parseInt(e.target.parentElement.getElementsByTagName("INPUT")[0].value)
-
-      if (userAnswer == answer){
-        activeScore++;
-        document.getElementById("answer-input").value = '';
-        correctAnswerCounterDisplay.innerText = `Number of correct answers: ${activeScore}`
-        answerForm.removeEventListener("click", moreQuestions)
-        handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName, user)
-      }
-      else {
-        heartsCounter--;
-        hearts.children[heartsCounter].style.display = 'none';
-        document.getElementById("answer-input").value=""
-        if (heartsCounter == 0){
-          document.getElementById("timer-display").innerText = `No more lives!`
-          answerForm.removeEventListener("click", moreQuestions)
-          gameOver(playerName, user);
-        }
-      }
-    }
-  })
-}
-
-
-
-function disableGameplay(){
-  document.getElementById("answer-input").disabled = true;
-  document.getElementById("answer-input").style.color = "gray";
-  document.getElementById("submit-answer-button").disabled = true;
-  document.getElementById("submit-answer-button").style.color = "gray";
-}
 function mathQuiz() {
   //determintes question type (+, -, *, /)
   questionType = Math.floor((Math.random() * 4) + 1)
@@ -199,13 +139,113 @@ function mathQuiz() {
     return (`${number1} / ${number2}`);
   }
 }
+function countdown(timer, playerName, user){
+  let timeRemaining = 10;
+  let gameCountdown = setInterval(function(){
+    timeRemaining--;
+    if (timeRemaining != 0 && gameActive == true) {
+      timer.innerText = timeRemaining
+    }
+    else if (gameActive == false){
+      return;
+    }
+    else {
+      timer.innerText = "Game Over!"
+      gameOver(playerName, user)
+      clearInterval(gameCountdown);
+    }
+  }, 1000)
+}
+function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName, user){
+  // debugger
+  let currentQuestion = mathQuiz();
+  let userAnswer; //declaring now. Will assign value later.
+  question.innerText = currentQuestion;
 
+  answerForm.addEventListener("click", function moreQuestions(e){
+    e.preventDefault();
+    if (e.target.id === "submit-answer-button"){
+      // debugger
+      let userAnswer = parseInt(e.target.parentElement.getElementsByTagName("INPUT")[0].value)
+
+      if (userAnswer == answer){
+        activeScore++;
+        document.getElementById("answer-input").value = '';
+        correctAnswerCounterDisplay.innerText = `Number of correct answers: ${activeScore}`
+        answerForm.removeEventListener("click", moreQuestions)
+        handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName, user)
+      }
+      else {
+        heartsCounter--;
+        hearts.children[heartsCounter].style.display = 'none';
+        document.getElementById("answer-input").value=""
+        if (heartsCounter == 0){
+          document.getElementById("timer-display").innerText = `No more lives!`
+          answerForm.removeEventListener("click", moreQuestions)
+          gameOver(playerName, user);
+        }
+      }
+    }
+  })
+}
+function disableGameplay(){
+  document.getElementById("answer-input").disabled = true;
+  document.getElementById("answer-input").style.color = "gray";
+  document.getElementById("submit-answer-button").disabled = true;
+  document.getElementById("submit-answer-button").style.color = "gray";
+}
 function gameOver(playerName, user){
   gameActive = false;
   disableGameplay();
-  // let user = findOrCreateUser(playerName);
   let newGame = user.createGame(activeScore);
+  postGameOptions()
 }
+function postGameOptions(){
+  let replayButton = document.createElement("button");
+  let scoreboardButton = document.createElement("button");
+  replayButton.innerText = "Replay"
+  scoreboardButton.innerText = "Scoreboard"
+  replayButton.id = "post-game-replay-button"
+  scoreboardButton.id = "post-game-scoreboard-button"
+  replayButton.className = "post-game-buttons"
+  scoreboardButton.className = "post-game-buttons"
+  postGameContainer.append(replayButton);
+  postGameContainer.append(scoreboardButton);
+
+  postGameContainer.addEventListener("click", function(e){
+    e.preventDefault();
+    if (e.target.id === "post-game-replay-button"){
+      alert("selected replay!")
+    }
+    else if (e.target.id === "post-game-scoreboard-button"){
+      displayScoreboard()
+    }
+})
+}
+
+function displayScoreboard(){
+  gameplayContainer.style.display = 'none';
+  let leaderboardContainer = document.createElement("div");
+  leaderboardContainer.id = "leaderboard-container"
+  let leaderboardHeadline = document.createElement("h1");
+  leaderboardHeadline.id = "leaderboard-headline"
+  leaderboardHeadline.innerText = "Leaderboard"
+  contentContainer.append(leaderboardContainer);
+  leaderboardContainer.append(leaderboardHeadline);
+
+  let leaderboardListContainer = document.createElement("li");
+  leaderboardContainer.append(leaderboardListContainer);
+
+
+  let sortedScores = store["game"].slice().sort( (a,b) => b.score - a.score )
+
+  sortedScores.forEach(function(individualGame){
+      let leaderboardItem = document.createElement("li");
+      leaderboardListContainer.append(leaderboardItem);
+  })
+}
+
+
 function findUser(playerName){
   return store["user"].find( (individualUser) => {
     return playerName === individualUser.name

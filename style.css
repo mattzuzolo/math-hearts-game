@@ -47,8 +47,6 @@ button {
   font-style: italic;
 }
 
-
-
 #start-button-no-login {
   font-size: 32px;
   padding-bottom: -20px;
@@ -95,6 +93,31 @@ button {
   margin: 20px;
 }
 
+#submit-answer-button {
+  background-color: white;
+  color: #ff4e47;
+  font-size: 56px;
+  border-radius: 8px;
+  padding: 1%;
+  border: none;
+  margin: 20px;
+}
+
+#post-game-option-container {
+  text-align: center;
+
+}
+
+.post-game-buttons {
+  background-color: white;
+  color: #ff4e47;
+  font-size: 56px;
+  border-radius: 8px;
+  padding: 1%;
+  border: none;
+  margin: 20px;
+}
+
 #correct-answer-counter-container {
   font-size: 48px;
 }
@@ -105,7 +128,7 @@ button {
 
 
 #timer-display {
-  font-size: 112px;
+  font-size: 180px;
   font-family: 'Graduate', cursive;
   color: white;
 }
@@ -113,4 +136,10 @@ button {
 .hearts {
   font-size: 125%;
   padding:20px;
+}
+
+#leaderboard-container {
+  font-size: 124px;
+  color: white;
+  text-align: center;
 }
