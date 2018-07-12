@@ -21,7 +21,7 @@ const questionAnswerContainer = document.getElementById("question-answer-contain
 const questionContainer = document.getElementById('question-container');
 const answerContainer = document.getElementById('answer-container');
 const correctAnswerContainer = document.getElementById('correct-answer-container');
-const strikeContainer = document.getElementById('strike-container');
+const heartContainer = document.getElementById('heart-container');
 const gameplayContainer = document.getElementById('gameplay-container');
 const postGameContainer = document.getElementById("post-game-option-container")
 const contentContainer = document.getElementById("content-container");
@@ -59,7 +59,7 @@ function gameSetup(){
   questionContainer.innerHTML=""
   timerContainer.innerHTML=""
   answerContainer.innerHTML=""
-  strikeContainer.innerHTML=""
+  heartContainer.innerHTML=""
   postGameContainer.innerHTML=""
 
   //create timer HTML and countdown
@@ -69,15 +69,14 @@ function gameSetup(){
   countdown(timerDisplay, playerName);
   timerContainer.append(timerDisplay);
 
-  //strikes
-  let strikesCounter = 3; //adjust this to increase/decrease number of starting lives
-  let startingStrike = strikesCounter
-  let heart = `<i class="fas fa-heart hearts"></i>`;
-  let strikes = document.createElement("h1");
-  strikes.style.textAlign = "center";
-  strikes.style.color = "white";
-  strikes.innerHTML = `<i id="heart-1" class="fas fa-heart hearts"></i><i id="heart-2" class="fas fa-heart hearts"></i><i id="heart-3" class="fas fa-heart hearts"></i>`
-  strikeContainer.append(strikes)
+  //hearts
+  let hearts = document.createElement("h1");
+  hearts.style.textAlign = "center";
+  hearts.style.color = "white";
+  hearts.id = "heartDisplay"
+  let heartsCounter = 3; //adjust this to increase/decrease number of starting lives
+  hearts.innerHTML = `<i id="heart-1" class="fas fa-heart hearts"></i><i id="heart-2" class="fas fa-heart hearts"></i><i id="heart-3" class="fas fa-heart hearts"></i>`
+  heartContainer.append(hearts)
 
   //Generate answer form
   let answerForm = document.createElement("form")
@@ -103,7 +102,7 @@ function gameSetup(){
   question.style.textAlign = "center";
   question.id = "question-text"
   questionContainer.append(question);
-  handleQuestionsAndAnswers(question, strikes, strikesCounter, startingStrike, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName)
+  handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName)
 }
 
 function countdown(timer, playerName){
@@ -126,14 +125,13 @@ function countdown(timer, playerName){
   }, 1000)
 }
 
-function handleQuestionsAndAnswers(question, strikes, strikesCounter, startingStrike, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName){
+function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName){
   let currentQuestion = mathQuiz();
   let userAnswer; //declaring now. Will assign value later.
   question.innerText = currentQuestion;
 
-  for (let i = 0; i < strikesCounter; i++){
-    strikes += `<i id="class="fas fa-heart hearts"></i>`
-  }
+
+
 
   answerForm.addEventListener("click", function (e){
     e.preventDefault();
@@ -143,17 +141,14 @@ function handleQuestionsAndAnswers(question, strikes, strikesCounter, startingSt
         activeScore++;
         document.getElementById("answer-input").value = '';
         correctAnswerCounterDisplay.innerText = `Number of correct answers: ${activeScore}`
-        handleQuestionsAndAnswers(question, strikes, strikesCounter, startingStrike, answerForm, correctAnswerCounterDisplay)
+        handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay)
       }
       else {
-        strikesCounter--;
-        //strikes.innerHTML -= `<i class="fas fa-heart hearts"></i>`;
-        //currentQuestion = mathQuiz();
-        // question.innerText = currentQuestion;
-        //this refreshes question if incorrect
+        heartsCounter--;
+        hearts.children[heartsCounter].style.display = 'none';
         document.getElementById("answer-input").value=""
-        if (strikesCounter == 0){
-          document.getElementById("timer-display").innerText = `Too many strikes!`
+        if (heartsCounter == 0){
+          document.getElementById("timer-display").innerText = `No more lives!`
           gameOver(playerName);
         }
       }
