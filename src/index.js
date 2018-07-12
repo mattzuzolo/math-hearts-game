@@ -70,9 +70,13 @@ function gameSetup(){
   timerContainer.append(timerDisplay);
 
   //strikes
+  let strikesCounter = 3; //adjust this to increase/decrease number of starting lives
+  let startingStrike = strikesCounter
+  let heart = `<i class="fas fa-heart hearts"></i>`;
   let strikes = document.createElement("h1");
   strikes.style.textAlign = "center";
   strikes.style.color = "white";
+  strikes.innerHTML = `<i id="heart-1" class="fas fa-heart hearts"></i><i id="heart-2" class="fas fa-heart hearts"></i><i id="heart-3" class="fas fa-heart hearts"></i>`
   strikeContainer.append(strikes)
 
   //Generate answer form
@@ -99,7 +103,7 @@ function gameSetup(){
   question.style.textAlign = "center";
   question.id = "question-text"
   questionContainer.append(question);
-  handleQuestionsAndAnswers(question, strikes, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName)
+  handleQuestionsAndAnswers(question, strikes, strikesCounter, startingStrike, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName)
 }
 
 function countdown(timer, playerName){
@@ -122,11 +126,14 @@ function countdown(timer, playerName){
   }, 1000)
 }
 
-function handleQuestionsAndAnswers(question, strikes, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName){
+function handleQuestionsAndAnswers(question, strikes, strikesCounter, startingStrike, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName){
   let currentQuestion = mathQuiz();
   let userAnswer; //declaring now. Will assign value later.
   question.innerText = currentQuestion;
-  strikes.innerText = "Current strikes: ";
+
+  for (let i = 0; i < strikesCounter; i++){
+    strikes += `<i id="class="fas fa-heart hearts"></i>`
+  }
 
   answerForm.addEventListener("click", function (e){
     e.preventDefault();
@@ -136,15 +143,16 @@ function handleQuestionsAndAnswers(question, strikes, answerForm, correctAnswerC
         activeScore++;
         document.getElementById("answer-input").value = '';
         correctAnswerCounterDisplay.innerText = `Number of correct answers: ${activeScore}`
-        handleQuestionsAndAnswers(question, strikes, answerForm, correctAnswerCounterDisplay)
+        handleQuestionsAndAnswers(question, strikes, strikesCounter, startingStrike, answerForm, correctAnswerCounterDisplay)
       }
       else {
-        strikes.innerText += "X";
+        strikesCounter--;
+        //strikes.innerHTML -= `<i class="fas fa-heart hearts"></i>`;
         //currentQuestion = mathQuiz();
         // question.innerText = currentQuestion;
         //this refreshes question if incorrect
         document.getElementById("answer-input").value=""
-        if (strikes.innerText == "Current strikes:XXX"){
+        if (strikesCounter == 0){
           document.getElementById("timer-display").innerText = `Too many strikes!`
           gameOver(playerName);
         }

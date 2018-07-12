@@ -3,6 +3,10 @@
   background-color: #ff4e47;
 }
 
+div {
+  background: transparent;
+}
+
 button {
   background-color: white;
   color: #ff4e47;
@@ -95,9 +99,18 @@ button {
   font-size: 48px;
 }
 
+#strike-container {
+  font-size: 40px;
+}
+
 
 #timer-display {
   font-size: 112px;
   font-family: 'Graduate', cursive;
   color: white;
+}
+
+.hearts {
+  font-size: 125%;
+  padding:20px;
 }
