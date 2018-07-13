@@ -157,7 +157,7 @@ function mathQuiz() {
   }
 }
 function countdown(timer, playerName, user){
-  let timeRemaining = 10;
+  let timeRemaining = 30;
   let gameCountdown = setInterval(function(){
     timeRemaining--;
     if (timeRemaining != 0 && gameActive == true) {
@@ -236,6 +236,7 @@ function postGameOptions(){
     }
     else if (e.target.id === "post-game-scoreboard-button"){
       displayScoreboard()
+
     }
 })
 }
@@ -255,6 +256,7 @@ function displayScoreboard(){
   leaderboardContainer.append(leaderboardHeadline);
 
   let leaderboardListContainer = document.createElement("div");
+  leaderboardListContainer.id = "leaderboard-list-container"
   leaderboardContainer.append(leaderboardListContainer);
 
   let leaderboardOl = document.createElement("ol");
@@ -265,9 +267,20 @@ function displayScoreboard(){
   sortedScores.forEach(function(individualGame){
       let leaderboardItem = document.createElement("li");
       let leaderboardUser = User.findUserById(individualGame.userId)
-      leaderboardItem.append(`${individualGame.score} - ${leaderboardUser.name}`)
+      leaderboardItem.append(`${individualGame.score} points - ${leaderboardUser.name}`)
       leaderboardOl.append(leaderboardItem);
   })
+
+  let homepageButton = document.createElement("button");
+  homepageButton.id = "homepage-button"
+  homepageButton.className = "button-login"
+  homepageButton.innerText = "Return to start"
+  leaderboardListContainer.append(homepageButton)
+
+  homepageButton.addEventListener("click", function(){
+    location.reload();
+  })
+
 }
 
 

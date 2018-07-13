@@ -147,3 +147,21 @@ button {
 #home-scoreboard-button {
   font-size: 50%;
 }
+
+#leaderboard-headline {
+  text-decoration: underline;
+}
+
+#leaderboard-list-container {
+  font-weight:300;
+  margin-top: -03%;
+  margin-left: 30%;
+  margin-right: 10%;
+  text-align:left;
+  text-justify: auto;
+}
+
+/* #homepage-button{
+  font-size: 72px;
+  margin: -5%;
+} */
