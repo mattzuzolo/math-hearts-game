@@ -119,32 +119,32 @@ function mathQuiz() {
   questionType = Math.floor((Math.random() * 4) + 1)
   //addition
   if (questionType === 1){
-    number1 = Math.floor((Math.random() * 10) + 1)
-    number2 = Math.floor((Math.random() * 10) + 1)
+    number1 = Math.floor((Math.random() * 100) + 1)
+    number2 = Math.floor((Math.random() * 100) + 1)
     answer = number1 + number2
     return (`${number1} + ${number2}`);
   }
   //subtraction
   else if (questionType === 2) {
-    number1 = Math.floor((Math.random() * 10) + 1)
-    number2 = Math.floor((Math.random() * 10) + 1)
+    number1 = Math.floor((Math.random() * 100) + 1)
+    number2 = Math.floor((Math.random() * 100) + 1)
     answer = number1 - number2
     return(`${number1} - ${number2}`);
   }
   //multiplication
   else if (questionType === 3) {
-    number1 = Math.floor((Math.random() * 5) + 1)
-    number2 = Math.floor((Math.random() * 5) + 1)
+    number1 = Math.floor((Math.random() * 15) + 1)
+    number2 = Math.floor((Math.random() * 15) + 1)
     answer = number1 * number2
     return(`${number1} * ${number2}`);
   }
   //division
   else if (questionType === 4) {
-    number1 = Math.floor((Math.random() * 2) + 1)
-    number2 = Math.floor((Math.random() * 1) + 1)
-    number1 = number1*number2
-    answer = number1/number2
-    return (`${number1} / ${number2}`);
+    number1 = Math.floor((Math.random() * 20) + 1)
+    number2 = Math.floor((Math.random() * 20) + 1)
+    // number1 = number1*number2
+    answer = number1 % number2
+    return (`${number1} % ${number2}`);
   }
 }
 function countdown(timer, playerName, user){
