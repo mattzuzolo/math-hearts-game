@@ -148,7 +148,7 @@ function mathQuiz() {
   }
 }
 function countdown(timer, playerName, user){
-  let timeRemaining = 10;
+  let timeRemaining = 1000;
   let gameCountdown = setInterval(function(){
     timeRemaining--;
     if (timeRemaining != 0 && gameActive == true) {
