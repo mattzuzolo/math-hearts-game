@@ -50,20 +50,22 @@ function saveGamesLocally(games){
     store["game"].push(currentGame)
  })
 }
-enterButton.addEventListener("submit", function clickForMe() {
-  debugger;
-  return loginSubmit.click()
-})
+// enterButton.addEventListener("submit", function clickForMe() {
+//   debugger;
+//   return loginSubmit.click()
+// })
 
 loginSubmit.addEventListener("click", gameSetup)
 loginField.addEventListener("keypress", function(e){
-  if (e.which == 13){
+  if (e.which === 13){
+    e.preventDefault()
     loginSubmit.click();
   }
 })
 
 
 function gameSetup(){
+  debugger;
   let playerName = loginField.value;
   let user = findOrCreateUser(playerName);
   gameActive = true;
@@ -76,7 +78,9 @@ function gameSetup(){
   answerContainer.innerHTML=""
   heartContainer.innerHTML=""
   postGameContainer.innerHTML=""
-  
+
+  // debugger;
+
   //create timer HTML and countdown
   let timerDisplay = document.createElement("h4");
   timerDisplay.style.textAlign = "center";
@@ -153,7 +157,7 @@ function mathQuiz() {
   }
 }
 function countdown(timer, playerName, user){
-  let timeRemaining = 10;
+  let timeRemaining = 30;
   let gameCountdown = setInterval(function(){
     timeRemaining--;
     if (timeRemaining != 0 && gameActive == true) {
@@ -232,6 +236,7 @@ function postGameOptions(){
     }
     else if (e.target.id === "post-game-scoreboard-button"){
       displayScoreboard()
+
     }
 })
 }
@@ -251,6 +256,7 @@ function displayScoreboard(){
   leaderboardContainer.append(leaderboardHeadline);
 
   let leaderboardListContainer = document.createElement("div");
+  leaderboardListContainer.id = "leaderboard-list-container"
   leaderboardContainer.append(leaderboardListContainer);
 
   let leaderboardOl = document.createElement("ol");
@@ -261,9 +267,20 @@ function displayScoreboard(){
   sortedScores.forEach(function(individualGame){
       let leaderboardItem = document.createElement("li");
       let leaderboardUser = User.findUserById(individualGame.userId)
-      leaderboardItem.append(`${individualGame.score} - ${leaderboardUser.name}`)
+      leaderboardItem.append(`${individualGame.score} points - ${leaderboardUser.name}`)
       leaderboardOl.append(leaderboardItem);
   })
+
+  let homepageButton = document.createElement("button");
+  homepageButton.id = "homepage-button"
+  homepageButton.className = "button-login"
+  homepageButton.innerText = "Return to start"
+  leaderboardListContainer.append(homepageButton)
+
+  homepageButton.addEventListener("click", function(){
+    location.reload();
+  })
+
 }
 
 
