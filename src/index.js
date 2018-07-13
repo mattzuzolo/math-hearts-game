@@ -224,7 +224,6 @@ function postGameOptions(){
     }
     else if (e.target.id === "post-game-scoreboard-button"){
       displayScoreboard()
-
     }
 })
 }
