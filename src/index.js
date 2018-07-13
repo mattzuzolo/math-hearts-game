@@ -32,6 +32,9 @@ const postGameContainer = document.getElementById("post-game-option-container");
 const loginField = document.getElementById("login-field")
 const loginSubmit = document.getElementById("login-submit-button")
 const homeScoreboardButton = document.getElementById("home-scoreboard-button");
+const correctAnswerSound = document.getElementById("correct");
+const wrongAnswerSound = document.getElementById("wrong");
+const gameOverSound = document.getElementById("gameOver");
 
 
 loginSubmit.addEventListener("click", gameSetup)
@@ -174,6 +177,7 @@ function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, 
       let userAnswer = parseInt(e.target.parentElement.getElementsByTagName("INPUT")[0].value)
 
       if (userAnswer == answer){
+        correctAnswerSound.play()
         activeScore++;
         document.getElementById("answer-input").value = '';
         correctAnswerCounterDisplay.innerText = `Number of correct answers: ${activeScore}`
@@ -181,6 +185,7 @@ function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, 
         handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName, user)
       }
       else {
+        wrongAnswerSound.play()
         heartsCounter--;
         hearts.children[heartsCounter].style.display = 'none';
         document.getElementById("answer-input").value=""
@@ -200,6 +205,7 @@ function disableGameplay(){
   document.getElementById("submit-answer-button").style.color = "gray";
 }
 function gameOver(playerName, user){
+  gameOverSound.play();
   gameActive = false;
   disableGameplay();
   let newGame = user.createGame(activeScore);
