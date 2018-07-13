@@ -49,6 +49,7 @@ div {
   font-family: 'Graduate', cursive;
   color: white;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 #question-answer-container{
@@ -57,11 +58,15 @@ div {
   color: white;
   position: absolute;
   width: 100%;
-  height: 20px;
+  /* height: 20px; */
   top: 30%;
   margin-top: -20%;
   padding: -15%;
   text-align: center;
+}
+
+#question-text{
+  padding: -50%;
 }
 
 #correct-answer-counter-container{
