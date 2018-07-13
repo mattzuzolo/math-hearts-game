@@ -209,7 +209,7 @@ function postGameOptions(){
   let replayButton = document.createElement("button");
   let scoreboardButton = document.createElement("button");
   replayButton.innerText = "Replay"
-  scoreboardButton.innerText = "Scoreboard"
+  scoreboardButton.innerText = "Leaderboard"
   replayButton.id = "post-game-replay-button"
   scoreboardButton.id = "post-game-scoreboard-button"
   replayButton.className = "more-buttons post-game-buttons"

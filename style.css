@@ -81,6 +81,10 @@ div {
   margin-top: -25%;
 }
 
+#post-game-option-container {
+  margin-top: 10%;
+}
+
 
 
 /*Leaderboard view*/
@@ -94,6 +98,7 @@ div {
 
 #leaderboard-headline {
   text-decoration: underline;
+  margin-bottom: 5%;
 }
 
 #leaderboard-list-container {
@@ -104,3 +109,7 @@ div {
   text-align: left;
   text-justify: auto;
 }
+
+/* #leaderboard-list-container li {
+  font-weight: 500;
+} */
