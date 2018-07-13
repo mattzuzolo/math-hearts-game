@@ -36,5 +36,4 @@ class User {
       return individualUser.localUserId == id;
     })
   }
-
 }
