@@ -17,25 +17,32 @@ fetch(userUrl)
 .then(response=>response.json())
 .then(data=>saveUsersLocally(data))
 
+const contentContainer = document.getElementById("content-container");
+
+const landingContainer = document.getElementById("landing-container");
+const gameplayContainer = document.getElementById('gameplay-container');
+
 const timerContainer = document.getElementById('timer-container');
-const questionAnswerContainer = document.getElementById("question-answer-container")
 const questionContainer = document.getElementById('question-container');
 const answerContainer = document.getElementById('answer-container');
-const correctAnswerContainer = document.getElementById('correct-answer-container');
-const heartContainer = document.getElementById('heart-container');
-const gameplayContainer = document.getElementById('gameplay-container');
-const contentContainer = document.getElementById("content-container");
-const getStartedButton = document.getElementById("get-started-button");
-const landingContainer = document.getElementById("landing-container");
-const loginSubmit = document.getElementById("login-submit-button")
 const correctAnswerCounterContainer = document.getElementById("correct-answer-counter-container")
-const loginField = document.getElementById("login-field")
-const homeViewScoreboard = document.getElementById("home-view-scoreboard");
+const heartContainer = document.getElementById('heart-container');
 const postGameContainer = document.getElementById("post-game-option-container");
-const homeScoreboardButton = document.getElementById("home-scoreboard-button");
-const enterButton=document.getElementById("enter")
 
+const loginField = document.getElementById("login-field")
+const loginSubmit = document.getElementById("login-submit-button")
+const homeScoreboardButton = document.getElementById("home-scoreboard-button");
+
+
+loginSubmit.addEventListener("click", gameSetup)
+loginField.addEventListener("keypress", function(e){
+  if (e.which === 13){
+    e.preventDefault()
+    loginSubmit.click();
+  }
+})
 homeScoreboardButton.addEventListener("click", displayScoreboard)
+
 
 function saveUsersLocally(data){
   data.forEach(function(individualUser){
@@ -50,22 +57,8 @@ function saveGamesLocally(games){
     store["game"].push(currentGame)
  })
 }
-// enterButton.addEventListener("submit", function clickForMe() {
-//   debugger;
-//   return loginSubmit.click()
-// })
-
-loginSubmit.addEventListener("click", gameSetup)
-loginField.addEventListener("keypress", function(e){
-  if (e.which === 13){
-    e.preventDefault()
-    loginSubmit.click();
-  }
-})
-
 
 function gameSetup(){
-  debugger;
   let playerName = loginField.value;
   let user = findOrCreateUser(playerName);
   gameActive = true;
@@ -73,13 +66,11 @@ function gameSetup(){
   landingContainer.style.display = 'block';
   landingContainer.style.display = 'none';
 
-  questionContainer.innerHTML=""
   timerContainer.innerHTML=""
+  questionContainer.innerHTML=""
   answerContainer.innerHTML=""
   heartContainer.innerHTML=""
   postGameContainer.innerHTML=""
-
-  // debugger;
 
   //create timer HTML and countdown
   let timerDisplay = document.createElement("h4");
@@ -157,7 +148,7 @@ function mathQuiz() {
   }
 }
 function countdown(timer, playerName, user){
-  let timeRemaining = 30;
+  let timeRemaining = 10;
   let gameCountdown = setInterval(function(){
     timeRemaining--;
     if (timeRemaining != 0 && gameActive == true) {
@@ -174,15 +165,12 @@ function countdown(timer, playerName, user){
   }, 1000)
 }
 function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName, user){
-  // debugger
   let currentQuestion = mathQuiz();
   let userAnswer; //declaring now. Will assign value later.
   question.innerText = currentQuestion;
-
   answerForm.addEventListener("click", function moreQuestions(e){
     e.preventDefault();
     if (e.target.id === "submit-answer-button"){
-      // debugger
       let userAnswer = parseInt(e.target.parentElement.getElementsByTagName("INPUT")[0].value)
 
       if (userAnswer == answer){
@@ -282,7 +270,6 @@ function displayScoreboard(){
   })
 
 }
-
 
 function findUser(playerName){
   return store["user"].find( (individualUser) => {
