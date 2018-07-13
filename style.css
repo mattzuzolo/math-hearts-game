@@ -7,59 +7,15 @@ div {
   background: transparent;
 }
 
-button {
-  background-color: white;
-  color: #ff4e47;
-  border-radius: 8px;
-  padding: .5%;
-  border: none;
-}
-
 #landing-container {
+  /* font-size: 72px; */
+  font-size: 3.75rem;
   color: white;
-  font-size: 72px;
   position: absolute;
   width: 100%;
   height: 20px;
   top: 30%;
-  margin-top: -10px;
   text-align: center;
-}
-
-#choose-login-container {
-  color: white;
-  font-size: 72px;
-  position: absolute;
-  width: 100%;
-  height: 20px;
-  top: 30%;
-  margin-top: -10px;
-  text-align: center;
-}
-
-#get-started-button {
-  font-size: 72px;
-}
-
-.login-note {
-  font-size: 28px;;
-  font-weight:300;
-  font-style: italic;
-}
-
-#start-button-no-login {
-  font-size: 32px;
-  padding-bottom: -20px;
-}
-
-.button-login{
-  background-color: white;
-  color: #ff4e47;
-  font-size: 62px;
-  border-radius: 8px;
-  padding: 1%;
-  border: none;
-  margin: 20px;
 }
 
 #question-answer-container{
@@ -69,83 +25,19 @@ button {
   width: 100%;
   height: 20px;
   top: 30%;
-  margin-top: -10px;
+  margin-top: -20%;
   text-align: center;
-}
-
-#answer-input {
-  background-color: white;
-  color: #ff4e47;
-  font-size: 56px;
-  border-radius: 8px;
-  padding: 1%;
-  border: none;
-  margin: 20px;
-}
-
-#submit-answer-button {
-  background-color: white;
-  color: #ff4e47;
-  font-size: 56px;
-  border-radius: 8px;
-  padding: 1%;
-  border: none;
-  margin: 20px;
-}
-
-#submit-answer-button {
-  background-color: white;
-  color: #ff4e47;
-  font-size: 56px;
-  border-radius: 8px;
-  padding: 1%;
-  border: none;
-  margin: 20px;
-}
-
-#post-game-option-container {
-  text-align: center;
-
-}
-
-.post-game-buttons {
-  background-color: white;
-  color: #ff4e47;
-  font-size: 56px;
-  border-radius: 8px;
-  padding: 1%;
-  border: none;
-  margin: 20px;
 }
 
 #correct-answer-counter-container {
   font-size: 48px;
 }
 
-#strike-container {
-  font-size: 40px;
-}
-
-
-#timer-display {
-  font-size: 180px;
-  font-family: 'Graduate', cursive;
-  color: white;
-}
-
-.hearts {
-  font-size: 125%;
-  padding:20px;
-}
-
 #leaderboard-container {
-  font-size: 124px;
+  /* font-size: 124px; */
+  font-size: 2.75rem;
   color: white;
   text-align: center;
-}
-
-#home-scoreboard-button {
-  font-size: 50%;
 }
 
 #leaderboard-headline {
@@ -153,15 +45,35 @@ button {
 }
 
 #leaderboard-list-container {
-  font-weight:300;
+  font-weight: 300;
   margin-top: -03%;
   margin-left: 30%;
   margin-right: 10%;
-  text-align:left;
+  text-align: left;
   text-justify: auto;
 }
 
-/* #homepage-button{
-  font-size: 72px;
-  margin: -5%;
-} */
+#timer-display {
+  font-size: 180px;
+  font-family: 'Graduate', cursive;
+  color: white;
+}
+
+.more-buttons {
+  /*Matt makes terrible class names!!!*/
+  /*THESE ARENT EVEN ALL BUTTONS~!!*/
+  background-color: white;
+  color: #ff4e47;
+  /* font-size: 62px; */
+  font-size: 2.5rem;
+  border-radius: 8px;
+  padding: 1%;
+  border: none;
+  margin: 20px;
+}
+
+.hearts {
+  font-size: 80%;
+  padding: 0.75%;
+  padding-top: -0.5%;
+}

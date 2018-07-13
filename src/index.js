@@ -98,8 +98,8 @@ function gameSetup(){
   answerInputField.id = "answer-input"
   answerSubmitButton.id = "submit-answer-button"
   answerForm.className = "answer-form-elements"
-  answerInputField.className = "answer-form-elements"
-  answerSubmitButton.className = "answer-form-elements"
+  answerInputField.className = "more-buttons answer-form-elements"
+  answerSubmitButton.className = "more-buttons answer-form-elements"
   answerForm.append(answerInputField);
   answerForm.append(answerSubmitButton);
   answerContainer.append(answerForm);
@@ -212,8 +212,8 @@ function postGameOptions(){
   scoreboardButton.innerText = "Scoreboard"
   replayButton.id = "post-game-replay-button"
   scoreboardButton.id = "post-game-scoreboard-button"
-  replayButton.className = "post-game-buttons"
-  scoreboardButton.className = "post-game-buttons"
+  replayButton.className = "more-buttons post-game-buttons"
+  scoreboardButton.className = "more-buttons post-game-buttons"
   postGameContainer.append(replayButton);
   postGameContainer.append(scoreboardButton);
 
@@ -261,8 +261,8 @@ function displayScoreboard(){
 
   let homepageButton = document.createElement("button");
   homepageButton.id = "homepage-button"
-  homepageButton.className = "button-login"
-  homepageButton.innerText = "Return to start"
+  homepageButton.className = "more-buttons button-login"
+  homepageButton.innerText = "Home"
   leaderboardListContainer.append(homepageButton)
 
   homepageButton.addEventListener("click", function(){
