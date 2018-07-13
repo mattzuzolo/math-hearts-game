@@ -1,3 +1,5 @@
+/*"Global" styling*/
+
 * {
   font-family: 'Ubuntu', sans-serif;
   background-color: #ff4e47;
@@ -6,6 +8,25 @@
 div {
   background: transparent;
 }
+
+.more-buttons {
+  /*Matt makes terrible class names!!!*/
+  /*THESE ARENT EVEN ALL BUTTONS~!!*/
+  background-color: white;
+  color: #ff4e47;
+  /* font-size: 62px; */
+  font-size: 2.5rem;
+  /* border-radius: 8px; --- this looks better than rem or %*/
+  border-radius:.4rem;
+  padding: 1%;
+  border: none;
+  /* margin: 20px; */
+  margin: .8rem;
+}
+
+
+
+/*Landing view*/
 
 #landing-container {
   /* font-size: 72px; */
@@ -18,20 +39,45 @@ div {
   text-align: center;
 }
 
+
+
+/*Gameplay view*/
+
+#timer-display {
+  /* font-size: 180px; */
+  font-size: 5rem;
+  font-family: 'Graduate', cursive;
+  color: white;
+}
+
 #question-answer-container{
-  font-size: 124px;
+  /* font-size: 124px; */
+  font-size: 6.5rem;
   color: white;
   position: absolute;
   width: 100%;
   height: 20px;
   top: 30%;
-  margin-top: -20%;
+  margin-top: -25%;
+  padding: -15%;
   text-align: center;
 }
 
-#correct-answer-counter-container {
-  font-size: 48px;
+#correct-answer-counter-container{
+  font-size: 2rem;
+  margin-bottom: -10%;
 }
+
+.hearts {
+  /* font-size: 80%; */
+  font-size: 6rem;
+  padding: 0.75%;
+  margin-top: -25%;
+}
+
+
+
+/*Leaderboard view*/
 
 #leaderboard-container {
   /* font-size: 124px; */
@@ -51,29 +97,4 @@ div {
   margin-right: 10%;
   text-align: left;
   text-justify: auto;
-}
-
-#timer-display {
-  font-size: 180px;
-  font-family: 'Graduate', cursive;
-  color: white;
-}
-
-.more-buttons {
-  /*Matt makes terrible class names!!!*/
-  /*THESE ARENT EVEN ALL BUTTONS~!!*/
-  background-color: white;
-  color: #ff4e47;
-  /* font-size: 62px; */
-  font-size: 2.5rem;
-  border-radius: 8px;
-  padding: 1%;
-  border: none;
-  margin: 20px;
-}
-
-.hearts {
-  font-size: 80%;
-  padding: 0.75%;
-  padding-top: -0.5%;
 }
