@@ -8,7 +8,10 @@
 div {
   background: transparent;
 }
-
+body {
+padding: 0;
+margin: 0;
+}
 .more-buttons {
   /*Matt makes terrible class names!!!*/
   /*THESE ARENT EVEN ALL BUTTONS~!!*/
@@ -43,8 +46,8 @@ div {
   font-size: 5rem;
   font-family: 'Graduate', cursive;
   color: white;
-  margin-top: 1.75rem;
-  margin-bottom: 0.5rem;
+  margin: 0;
+  /* margin-bottom: 0.5rem; */
 }
 
 #question-answer-container{
@@ -52,15 +55,19 @@ div {
   color: white;
   position: absolute;
   width: 100%;
-  top: 15%;
-  margin-top: -1.5rem;
+  /* top: 15%; */
+  /* margin:0; */
   text-align: center;
+  height: -30%
 }
 
 #question-text{
-  padding: -50%;
+  margin: 0;
 }
 
+#answer-form{
+  margin: 0;
+}
 #correct-answer-counter-container{
   font-size: 2rem;
   margin-bottom: -10%;

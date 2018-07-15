@@ -35,7 +35,9 @@ const homeScoreboardButton = document.getElementById("home-scoreboard-button");
 const correctAnswerSound = document.getElementById("correct");
 const wrongAnswerSound = document.getElementById("wrong");
 const gameOverSound = document.getElementById("gameOver");
-
+const winnerSound = document.getElementById("winner");
+loginField.focus();
+loginField.select();
 
 loginSubmit.addEventListener("click", gameSetup)
 loginField.addEventListener("keypress", function(e){
@@ -106,6 +108,8 @@ function gameSetup(){
   answerForm.append(answerInputField);
   answerForm.append(answerSubmitButton);
   answerContainer.append(answerForm);
+  answerInputField.focus();
+  answerInputField.select();
 
   let correctAnswerCounterDisplay = document.createElement("h2")
   correctAnswerCounterContainer.append(correctAnswerCounterDisplay)
@@ -122,29 +126,29 @@ function mathQuiz() {
   questionType = Math.floor((Math.random() * 4) + 1)
   //addition
   if (questionType === 1){
-    number1 = Math.floor((Math.random() * 100) + 1)
-    number2 = Math.floor((Math.random() * 100) + 1)
+    number1 = Math.floor((Math.random() * 30) + 1)
+    number2 = Math.floor((Math.random() * 30) + 1)
     answer = number1 + number2
     return (`${number1} + ${number2}`);
   }
   //subtraction
   else if (questionType === 2) {
-    number1 = Math.floor((Math.random() * 100) + 1)
-    number2 = Math.floor((Math.random() * 100) + 1)
+    number1 = Math.floor((Math.random() * 50) + 1)
+    number2 = Math.floor((Math.random() * 10) + 1)
     answer = number1 - number2
     return(`${number1} - ${number2}`);
   }
   //multiplication
   else if (questionType === 3) {
     number1 = Math.floor((Math.random() * 15) + 1)
-    number2 = Math.floor((Math.random() * 15) + 1)
+    number2 = Math.floor((Math.random() * 5) + 1)
     answer = number1 * number2
     return(`${number1} * ${number2}`);
   }
   //division
   else if (questionType === 4) {
-    number1 = Math.floor((Math.random() * 20) + 1)
-    number2 = Math.floor((Math.random() * 20) + 1)
+    number1 = Math.floor((Math.random() * 40) + 1)
+    number2 = Math.floor((Math.random() * 10) + 1)
     // number1 = number1*number2
     answer = number1 % number2
     return (`${number1} % ${number2}`);
@@ -168,11 +172,14 @@ function countdown(timer, playerName, user){
   }, 1000)
 }
 function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, correctAnswerCounterDisplay, timerDisplay, playerName, user){
+
   let currentQuestion = mathQuiz();
   let userAnswer; //declaring now. Will assign value later.
   question.innerText = currentQuestion;
   answerForm.addEventListener("click", function moreQuestions(e){
     e.preventDefault();
+    wrongAnswerSound.pause()
+    correctAnswerSound.pause()
     if (e.target.id === "submit-answer-button"){
       let userAnswer = parseInt(e.target.parentElement.getElementsByTagName("INPUT")[0].value)
 
@@ -189,6 +196,7 @@ function handleQuestionsAndAnswers(question, hearts, heartsCounter, answerForm, 
         heartsCounter--;
         hearts.children[heartsCounter].style.display = 'none';
         document.getElementById("answer-input").value=""
+        question.innerText = mathQuiz()
         if (heartsCounter == 0){
           document.getElementById("timer-display").innerText = `No more lives!`
           answerForm.removeEventListener("click", moreQuestions)
@@ -235,7 +243,7 @@ function postGameOptions(){
 }
 
 function displayScoreboard(){
-
+  winnerSound.play()
   landingContainer.style.display = 'block';
   landingContainer.style.display = 'none';
 
@@ -244,7 +252,7 @@ function displayScoreboard(){
   leaderboardContainer.id = "leaderboard-container"
   let leaderboardHeadline = document.createElement("h1");
   leaderboardHeadline.id = "leaderboard-headline"
-  leaderboardHeadline.innerText = "Leaderboard"
+  leaderboardHeadline.innerText = "Leaderboard (Top 10)"
   contentContainer.append(leaderboardContainer);
   leaderboardContainer.append(leaderboardHeadline);
 
@@ -257,13 +265,18 @@ function displayScoreboard(){
 
   let sortedScores = store["game"].slice().sort( (a,b) => b.score - a.score )
 
-  sortedScores.forEach(function(individualGame){
+  sortedScores.slice(0,10).forEach(function(individualGame){
       let leaderboardItem = document.createElement("li");
       let leaderboardUser = User.findUserById(individualGame.userId)
       leaderboardItem.append(`${individualGame.score} points - ${leaderboardUser.name}`)
       leaderboardOl.append(leaderboardItem);
   })
-
+leaderboardOl.firstChild.innerHTML += `<img src="images/best.png" height="52" width="112">`
+setInterval(function() {
+  // debugger;
+  let winner=leaderboardOl.firstChild.getElementsByTagName("img")[0]
+        winner.style.display = (winner.style.display == 'none' ? '' : 'none');
+    }, 1000);
   let homepageButton = document.createElement("button");
   homepageButton.id = "homepage-button"
   homepageButton.className = "more-buttons button-login"
@@ -271,6 +284,7 @@ function displayScoreboard(){
   leaderboardListContainer.append(homepageButton)
 
   homepageButton.addEventListener("click", function(){
+    winnerSound.pause()
     location.reload();
   })
 
